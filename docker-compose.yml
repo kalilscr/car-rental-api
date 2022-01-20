@@ -12,9 +12,7 @@ services:
             - POSTGRES_PASSWORD=ignite
             - POSTGRES_DB=carrentalx
         volumes:
-            - pgdata:/data/postgres
-
-
+            - pgdata:/data/postgres 
     app:
         build: .
         container_name: carrentalx
@@ -26,7 +24,7 @@ services:
         links:
             - database
         depends_on:
-            - database
+            - database 
 
 
 volumes:
