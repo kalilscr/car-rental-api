@@ -9,7 +9,7 @@ const categoriesRoutes = Router();
 
 const upload = multer({
     dest: "./temp",
-}); 
+});
 
 const createCategoryController = new CreateCategoryController();
 const importCategoryController = new ImportCategoryController();
@@ -19,6 +19,10 @@ categoriesRoutes.post("/", createCategoryController.handle);
 
 categoriesRoutes.get("/", listCategoriesController.handle);
 
-categoriesRoutes.post("/import", upload.single("file"), importCategoryController.handle);
+categoriesRoutes.post(
+    "/import",
+    upload.single("file"),
+    importCategoryController.handle
+);
 
 export { categoriesRoutes };

@@ -5,9 +5,9 @@ import "./database";
 
 import "./shared/container";
 
-import { router } from "./routes";
+import swaggerUI from "swagger-ui-express";
 
-import swaggerUI from "swagger-ui-express"
+import { router } from "./routes";
 import swaggerFile from "./swagger.json";
 
 const app = express();

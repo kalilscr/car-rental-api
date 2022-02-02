@@ -1,8 +1,9 @@
-import fs from "fs";
 import { parse } from "csv-parse";
-import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
+import fs from "fs";
 import { inject, injectable } from "tsyringe";
- 
+
+import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
+
 interface IImportCategory {
     name: string;
     description: string;
@@ -12,7 +13,8 @@ interface IImportCategory {
 class ImportCategoryUseCase {
     constructor(
         @inject("CategoriesRepository")
-        private categoriesRepository: ICategoriesRepository) {}
+        private categoriesRepository: ICategoriesRepository
+    ) {}
 
     loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
         return new Promise((resolve, reject) => {
@@ -24,21 +26,22 @@ class ImportCategoryUseCase {
 
             stream.pipe(parseFile);
 
-            parseFile.on("data", async (line) => {
-                const [name, description] = line;
+            parseFile
+                .on("data", async (line) => {
+                    const [name, description] = line;
 
-                categories.push({
-                    name,
-                    description,
+                    categories.push({
+                        name,
+                        description,
+                    });
+                })
+                .on("end", () => {
+                    fs.promises.unlink(file.path);
+                    resolve(categories);
+                })
+                .on("error", (err) => {
+                    reject(err);
                 });
-            })
-            .on("end", () => {
-                fs.promises.unlink(file.path);
-                resolve(categories);
-            })
-            .on("error", (err) => {
-                reject(err);
-            })
         });
     }
 
@@ -47,8 +50,10 @@ class ImportCategoryUseCase {
 
         categories.map(async (category) => {
             const { name, description } = category;
-            
-            const existCategory = await this.categoriesRepository.findByName(name);
+
+            const existCategory = await this.categoriesRepository.findByName(
+                name
+            );
 
             if (!existCategory) {
                 await this.categoriesRepository.create({
@@ -56,7 +61,7 @@ class ImportCategoryUseCase {
                     description,
                 });
             }
-        }); 
+        });
     }
 }
 
