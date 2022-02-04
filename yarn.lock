@@ -1466,6 +1466,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-async-errors@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "express-async-errors@npm:3.1.1"
+  peerDependencies:
+    express: ^4.16.2
+  checksum: 3a2a6df8ea957185df401a239189d617715c38fba13fac8ced7750b25fa95b0ae656e5d1385d12d0e4dcd7997e90d070b218e86abcf8e68bb6048830b53ba668
+  languageName: node
+  linkType: hard
+
 "express@npm:^4.17.2":
   version: 4.17.2
   resolution: "express@npm:4.17.2"
@@ -3957,6 +3966,7 @@ __metadata:
     eslint-plugin-import-helpers: ^1.2.0
     eslint-plugin-prettier: ^4.0.0
     express: ^4.17.2
+    express-async-errors: ^3.1.1
     jsonwebtoken: ^8.5.1
     multer: ^1.4.4
     pg: ^8.7.1
