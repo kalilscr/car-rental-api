@@ -23,7 +23,7 @@ Deve ser possível listar todos os carros disponíveis pelo nome da marca.
 Deve ser possível listar todos os carros disponíveis pelo nome do carro.
 
 **RN**
-O usuário não precisa estar loado no sistema.
+O usuário não precisa estar logado no sistema.
 
 # Cadastro de especificação no carro
 
