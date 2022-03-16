@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
+import { ISpecificationsRepository } from "../../repositories/ISpecificationsRepository";
 
 interface IRequest {
     car_id: string;
@@ -11,7 +12,9 @@ interface IRequest {
 class CreateCarSpecificationUseCase {
     constructor(
         //@inject("CarsRepository")
-        private carsRepository: ICarsRepository
+        private carsRepository: ICarsRepository,
+
+        private specificationsRepository: ISpecificationsRepository
     ) {}
     
     async execute({ car_id, specifications_id }: IRequest): Promise<void> {
@@ -21,7 +24,11 @@ class CreateCarSpecificationUseCase {
             throw new AppError("Car not found");
         }
 
+        const specifications = await this.specificationsRepository.findByIds(specifications_id);
 
+        car.specifications = specifications;
+
+        await this.carsRepository.create(car);
     }
 }
 
