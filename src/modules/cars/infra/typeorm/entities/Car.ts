@@ -11,6 +11,7 @@ import {
   import { v4 as uuidV4 } from "uuid";
   
 import { Category } from "./Category";
+import { Specification } from "./Specification";
 
 @Entity("cars") 
 class Car {
@@ -41,6 +42,14 @@ class Car {
     @ManyToOne(() => Category)
     @JoinColumn({ name: "category_id" })
     category: Category;
+
+    @ManyToMany(() => Specification)
+    @JoinTable({
+        name: "specifications_cars", // nome da tabela de relacionamento
+        joinColumns: [{ name: "car_id" }], // nome da coluna da tabela de relacionamento que vai referenciar a tabela de origem no caso cars(tabela que estamos)
+        inverseJoinColumns: [{ name: "specification_id" }], // nome da coluna da tabela de relacionamento que vai referenciar a outra tabela que estamos referenciando no many to many
+    })
+    specifications: Specification[];
 
     @Column()
     category_id: string;
