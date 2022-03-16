@@ -22,7 +22,9 @@ class SpecificationsRepository implements ISpecificationsRepository {
             description,
         });
 
-        return await this.repository.save(specification);
+        await this.repository.save(specification);
+
+        return specification;
     }
 
     async list(): Promise<Specification[]> {
@@ -36,7 +38,8 @@ class SpecificationsRepository implements ISpecificationsRepository {
     }
 
     findByIds(ids: string[]): Promise<Specification[]> {
-        throw new Error("Method not implemented.");
+        const specifications = this.repository.findByIds(ids);
+        return specifications;
     }
 }
 
