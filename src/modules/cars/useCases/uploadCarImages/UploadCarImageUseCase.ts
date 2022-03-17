@@ -1,0 +1,6 @@
+
+class UploadCarImageUseCase {
+
+}
+
+export { UploadCarImageUseCase };
