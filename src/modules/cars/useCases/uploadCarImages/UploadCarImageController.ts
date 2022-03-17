@@ -1,6 +1,0 @@
-
-class UploadCarImageController {
-
-}
-
-export { UploadCarImageController };
