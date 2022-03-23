@@ -2031,6 +2031,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "dayjs@npm:1.11.0"
+  checksum: 2d36f6d71345114cdcd89147adf9e05b4f8fe81684e08c8bf1f86b140aa0b86ecc3cae661a9348d96feb7fbefd03e1bc3697303688e95209670abcb36b4ece15
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -6357,6 +6364,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.8.1
     bcrypt: ^5.0.1
     csv-parse: ^5.0.4
+    dayjs: ^1.11.0
     eslint: ^7.32.0
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.3.0
