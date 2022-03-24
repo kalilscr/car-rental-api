@@ -12,15 +12,15 @@ interface IRequest {
   expected_return_date: Date;
 }
 
-//@injectable()
+@injectable()
 class CreateRentalUseCase {
   constructor(
-    //@inject("RentalsRepository")
+    @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
-    //@inject("DayjsDateProvider")
+    @inject("DayjsDateProvider")
     private dateProvider: IDateProvider,
-    //@inject("CarsRepository")
-    private carsRepository: ICarsRepository
+    /* @inject("CarsRepository")
+    private carsRepository: ICarsRepository */
   ) {}
 
   async execute({
@@ -63,7 +63,7 @@ class CreateRentalUseCase {
       expected_return_date,
     });
 
-    await this.carsRepository.updateAvailable(car_id, false);
+    //await this.carsRepository.updateAvailable(car_id, false);
 
     return rental;
   }
