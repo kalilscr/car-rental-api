@@ -8,7 +8,7 @@ export default async (host = "database"): Promise<Connection> => {
             host: process.env.NODE_ENV === "test" ? "localhost" : host, // Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
             database: 
             process.env.NODE_ENV === "test" 
-            ? "rentx_test" 
+            ? "carrentalx" 
             : defaultOptions.database,
         })
     );

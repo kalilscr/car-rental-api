@@ -5,44 +5,48 @@ import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 let createCategoryUseCase: CreateCategoryUseCase;
 let categoriesRepositoryInMemory: CategoriesRepositoryInMemory;
 
-describe("Criar categoria", () => {
-    beforeEach(() => {
-        categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
-        createCategoryUseCase = new CreateCategoryUseCase(categoriesRepositoryInMemory);
+describe("Create Category", () => {
+  beforeEach(() => {
+    categoriesRepositoryInMemory = new CategoriesRepositoryInMemory();
+    createCategoryUseCase = new CreateCategoryUseCase(
+      categoriesRepositoryInMemory
+    );
+  });
+
+  it("should be able to create a new category", async () => {
+    const category = {
+      name: "Category Test",
+      description: "Category description Test",
+    };
+
+    await createCategoryUseCase.execute({
+      name: category.name,
+      description: category.description,
     });
 
-    it("should be able to create a new category", async () => {
-        const category = {
-            name: "category test",
-            description: "category description test",
-        };
+    const categoryCreated = await categoriesRepositoryInMemory.findByName(
+      category.name
+    );
 
-        await createCategoryUseCase.execute({
-            name: category.name,
-            description: category.description,
-        });
+    expect(categoryCreated).toHaveProperty("id");
+  });
 
-        const categoryFound = await categoriesRepositoryInMemory.findByName(category.name);
+  it("should not be able to create a new category that already exists", async () => {
+    const category = {
+      name: "Category Test",
+      description: "Category description Test",
+    };
 
-        expect(categoryFound).toHaveProperty("id");
+    await createCategoryUseCase.execute({
+      name: category.name,
+      description: category.description,
     });
 
-    it("should not be able to create a new category that already exists", async () => {
-        expect(async () => {
-            const category = {
-                name: "category test",
-                description: "category description test",
-            };
-    
-            await createCategoryUseCase.execute({
-                name: category.name,
-                description: category.description,
-            });
-    
-            await createCategoryUseCase.execute({
-                name: category.name,
-                description: category.description,
-            });
-        }).rejects.toBeInstanceOf(AppError);
-    });
+    await expect(
+      createCategoryUseCase.execute({
+        name: category.name,
+        description: category.description,
+      })
+    ).rejects.toEqual(new AppError("Category already exists!"));
+  });
 });
