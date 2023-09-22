@@ -3,6 +3,7 @@ import { verify } from "jsonwebtoken";
 
 import { AppError } from "../../../errors/AppError";
 import { UsersRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
+import auth from "../../../../config/auth";
 
 interface IPayload {
     sub: string;
@@ -22,7 +23,7 @@ export async function ensureAuthenticated(request: Request, response: Response, 
     const [, token] = authHeader.split(" ");
 
     try {
-        const { sub: user_id } = verify(token, "1f43d73e4b0203b053a05571416377c2") as IPayload;
+        const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
         const usersRepository = new UsersRepository();
 
@@ -38,6 +39,6 @@ export async function ensureAuthenticated(request: Request, response: Response, 
 
         next();
     } catch {
-        throw new AppError("Invalid token!!", 401);
+        throw new AppError("Invalid token!", 401);
     }
 }
