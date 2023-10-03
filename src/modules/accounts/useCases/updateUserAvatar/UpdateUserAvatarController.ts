@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { UpdateUserAvatarUseCase } from "./updateUserAvatarUseCase";
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import { UpdateUserAvatarUseCase } from './UpdateUserAvatarUseCase';
 
 class UpdateUserAvatarController {
     async handle(request: Request, response: Response): Promise<Response> {
@@ -8,7 +8,7 @@ class UpdateUserAvatarController {
         const avatar_file = request.file.filename;
 
         const updateUserAvatarUseCase = container.resolve(
-            UpdateUserAvatarUseCase
+            UpdateUserAvatarUseCase,
         );
 
         await updateUserAvatarUseCase.execute({ user_id: id, avatar_file });
