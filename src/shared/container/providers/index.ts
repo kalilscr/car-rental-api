@@ -1,3 +1,3 @@
-import './DateProvider/index.ts';
-import './MailProvider/index.ts';
-import './StorageProvider/index.ts';
+import './DateProvider/index';
+import './MailProvider/index';
+import './StorageProvider/index';
