@@ -1,8 +1,16 @@
 node_modules/
-.yarn/
 .env
 coverage/
 dist/
 .vscode
+
 tmp/*
 !tmp/.gitkeep
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
