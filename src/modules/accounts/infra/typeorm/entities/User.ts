@@ -27,7 +27,6 @@ class User {
 
     @CreateDateColumn()
     created_at: Date;
-
     @Expose({ name: 'avatar_url' })
     avatar_url(): string {
         switch (process.env.STORAGE) {
