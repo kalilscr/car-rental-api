@@ -4,6 +4,7 @@ coverage/
 dist/
 .vscode
 ormconfig.json
+package-lock.json
 
 tmp/*
 !tmp/.gitkeep
