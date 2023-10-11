@@ -6,15 +6,18 @@ import 'express-async-errors';
 import swaggerUI from 'swagger-ui-express';
 
 import '../../container';
+import upload from '../../../config/upload';
 import { AppError } from '../../errors/AppError';
+import rateLimiter from './middlewares/rateLimiter';
 import createConnection from '../typeorm';
 
 import swaggerFile from '../../../swagger.json';
-import upload from '../../../config/upload';
 import { router } from './routes';
 
 createConnection();
 const app = express();
+
+app.use(rateLimiter);
 
 app.use(express.json());
 
